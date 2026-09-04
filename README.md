@@ -1,4 +1,5 @@
 # Schedule Generator
+WebSite: <a> https://fabrizzio1235.pythonanywhere.com/ </a> | Available until: Sunday 04 October 2026
 #### Description:
 
 This project was created with the principal purpose to help students who want to create their perfect schedule. In my school, the administration gave us an Excel file. In that document, there are a lot of subjects and it is very complicated to find your personal schedule. You spend a lot of time checking every teacher, checking if they don't overlap with each other, etc. Many problems! With my app, you can easily generate schedules in a matter of minutes or even seconds. You only have to submit your schedule in the correct format (specified there), then you select your subjects, and finally your teachers. The app will create the possible schedules. If it is not possible, the app will let you know. To be honest, I don't really know how it works in other countries (selecting your schedule and not being assigned by the administration). But at my university, student have to form your schedule using the Excel file provided by the administration.
