@@ -1,0 +1,68 @@
+    {% extends "layout.html" %}
+
+    {% block script %}
+        <script>
+            // Aquí conviertes schedules de Python a JSON válido de JS
+            window.schedules = {{ (schedules | default([])) | tojson | safe }};
+            window.data = {{ data | tojson | safe }};
+        </script>
+        <script src="/static/generator.js"></script>
+    {% endblock %}
+
+
+    {% block title %}
+        Generator 
+    {% endblock %}
+
+    {% block main %}
+            <form method="post" action="/generator">
+                {% if not schedules %}
+                    <h1 class="title-index">Select the teacher</h1>
+                    <div id ="filters-container">
+                        {% for group in table | groupby('subject') %}
+                        <div class="filter-container">
+                            {{ group.grouper }}
+                            <div class = "subject">
+                                <select name="{{ group.grouper }}">
+                                {% for row in group.list | unique(attribute='teacher') %}
+                                    <option value = "{{  row.teacher }}">{{ row.teacher }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% if isPossible or isPossible is not defined %}
+                        <button type="submit">Generate</button>
+                    {% else %}
+                        <p style="color: brown;">This Schedule is not possible, try another combination</p>
+                        <button type="submit">Generate</button>
+                    {% endif %}
+            </form>
+                {% else %}
+                    <h1 id = "counter-pages" >1 / {{ schedules|length }}</h1><button id = "left-button" type="button">left</button>  <h1 style="display: inline-block;">/</h1>   <button id = "right-button" type="button">right</button>
+                    <div class="ScheduleTable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td class="dayRow"  id= "monday"></td> 
+                                <td class="dayRow"  id= "tuesday"></td> 
+                                <td class="dayRow"  id= "wednesday"></td> 
+                                <td class="dayRow"  id= "thursday"></td> 
+                                <td class="dayRow"  id= "friday"></td> 
+                            </tbody>
+                        </table>
+
+                    </div>
+                {% endif %}
+       
+        
+    {% endblock%}

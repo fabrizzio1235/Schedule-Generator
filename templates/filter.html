@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block script %}<script src="/static/selectsubjects.js"></script>{% endblock %}
+
+{% block title %}
+    Filter 
+{% endblock %}
+
+{% block main %}
+    <h1 class="title-index">Select your subjects</h1>
+        <div class="type-center"><input id = "typesubject"placeholder="Type Subject"></div>
+    
+        <form action = "/filter" method="POST" id ="myForm">
+                <div id="selected-list"></div>
+                <input type="hidden" name="subject" id = "input">
+            <button type="submit" id = "submit">Submit</button> <span style="color: brown;" id ="advise-button"></span>
+        </form>
+
+        <div class="box-options">
+                {% for i in table %}
+                    <button type="button" class="subject-options" id="{{i.subject}}">{{i.subject}}</button>
+                {% endfor %}
+        </div>
+{% endblock %}
